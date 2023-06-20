@@ -40,12 +40,9 @@ import type {
 declare module 'vue-router/auto/routes' {
   export interface RouteNamedMap {
     'Cart': RouteRecordInfo<'Cart', '/cart', Record<never, never>, Record<never, never>>,
-    'Etablishments': RouteRecordInfo<'Etablishments', '/etablishments', Record<never, never>, Record<never, never>>,
-    'Etablishment': RouteRecordInfo<'Etablishment', '/etablishments/:id/:name', { id: ParamValue<true>, name: ParamValue<true> }, { id: ParamValue<false>, name: ParamValue<false> }>,
-    'etablishment.cart': RouteRecordInfo<'etablishment.cart', '/etablishments/:id/:name/cart', { id: ParamValue<true>, name: ParamValue<true> }, { id: ParamValue<false>, name: ParamValue<false> }>,
-    'Product': RouteRecordInfo<'Product', '/etablishments/:id/:name/products/:productId', { id: ParamValue<true>, name: ParamValue<true>, productId: ParamValue<true> }, { id: ParamValue<false>, name: ParamValue<false>, productId: ParamValue<false> }>,
     'Search': RouteRecordInfo<'Search', '/search', Record<never, never>, Record<never, never>>,
     'Settings': RouteRecordInfo<'Settings', '/settings', Record<never, never>, Record<never, never>>,
+    'Shops': RouteRecordInfo<'Shops', '/shops', Record<never, never>, Record<never, never>>,
   }
 }
 

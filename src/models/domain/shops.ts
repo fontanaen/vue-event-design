@@ -1,9 +1,9 @@
 import type { Product } from '@/models/domain/products'
 
-export type Etablishment = {
+export type Shop = {
     id: number,
     name: string,
     products: Product[]
 }
 
-export type Etablishments = Etablishment[]
+export type Shops = Shop[]

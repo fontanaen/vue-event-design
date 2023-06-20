@@ -5,7 +5,7 @@ import Page from '@/layouts/Page.vue';
 import { storeToRefs } from 'pinia';
 import CartView from '@/views/CartView.vue';
 import { useCartStore } from '@/stores/cart';
-import { useEtablishmentsStore } from '@/stores/etablishments';
+import { useShopsStore } from '@/stores/shops';
 import Button from '@/components/shared/Button.vue';
 import { computed } from 'vue';
 
@@ -18,14 +18,14 @@ definePage({
 const cartStore = useCartStore();
 const { cart, groupedByProducts, totalAmount } = storeToRefs(cartStore);
 
-const etablishmentsStore = useEtablishmentsStore();
-const etablishment = computed(() => etablishmentsStore.getEtablishmentById(cart.value.etablishmentId as number) ?? null)
+const shopsStore = useShopsStore();
+const shop = computed(() => shopsStore.getShopById(cart.value.shopId as number) ?? null)
 </script>
 
 <template>
     <Page class="text-black dark:text-white">
         <CartView             
-            :etablishment="etablishment" 
+            :shop="shop" 
             :products="groupedByProducts"
             :totalAmount="totalAmount"
             @add="cartStore.addToCart" 
@@ -33,7 +33,7 @@ const etablishment = computed(() => etablishmentsStore.getEtablishmentById(cart.
         >
             <template #activeCartActions>
                 <Button>Confirm cart</Button>
-                <Button @click="router.replace({ name: 'Etablishment',  params: { id: etablishment.id, name: etablishment?.name }})">Add products</Button>
+                <Button @click="router.replace({ name: 'Shop',  params: { id: shop.id, name: shop?.name }})">Add products</Button>
             </template>
         </CartView>
     </Page>

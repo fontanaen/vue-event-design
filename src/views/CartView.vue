@@ -1,14 +1,14 @@
 <script lang=ts setup>
 import QuantitySelector from '@/components/cart/QuantitySelector.vue';
 import View from '@/layouts/View.vue';
-import { Etablishment } from '@/models/domain/etablishments';
+import { Shop } from '@/models/domain/shops';
 import { Product } from '@/models/domain/products';
 import { computed } from 'vue';
 
 const emit = defineEmits<{ (e: 'add', id: number): void, (e: 'remove', id: number): void }>();
 
 const props = defineProps<{
-    etablishment: Etablishment | null;
+    shop: Shop | null;
     products: (Product & { quantity: number })[]
     totalAmount: number;
 }>()
@@ -16,8 +16,8 @@ const props = defineProps<{
 
 <template>
     <View class="flex flex-col gap-4 p-4">
-        <template v-if="props.etablishment">
-            <div class="text-xl font-semibold">{{ props.etablishment.name }}</div>
+        <template v-if="props.shop">
+            <div class="text-xl font-semibold">{{ props.shop.name }}</div>
         
             <div class="flex flex-col gap-3">
                 <div v-for="(product, index) in props.products" :key="index" class="flex items-center gap-4 ">
@@ -41,7 +41,7 @@ const props = defineProps<{
         </template>
 
         <template #bottomActions>
-            <slot :name="props.etablishment ? 'activeCartActions': 'emptyCartActions'"></slot>
+            <slot :name="props.shop ? 'activeCartActions': 'emptyCartActions'"></slot>
         </template>
     </View>  
 </template>

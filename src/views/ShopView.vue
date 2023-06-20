@@ -3,7 +3,7 @@ import View from '@/layouts/View.vue';
 import { Product } from '@/models/domain/products';
 
 const props = defineProps<{ 
-    etablishment: any,
+    shop: any,
     cart: (Product & { quantity: number })[]
 }>()
 
@@ -16,9 +16,9 @@ const getProductQuantityFromCart = (id: number) => {
     <View class="flex flex-col gap-0" style="height: 3000px">
         <div class="h-40 w-full bg-gray-500 lg:h-60"></div>
         <div class="container mx-auto">
-            <div class="p-4 text-2xl font-semibold">{{ props.etablishment.name }}</div>
+            <div class="p-4 text-2xl font-semibold">{{ props.shop.name }}</div>
             <div class="p-4 flex flex-col gap-4">
-                <RouterLink v-for="({id, name, price, currency}) in props.etablishment.products" :key="id" :to="{ name: 'Product', params: { productId: id }}" class="flex">
+                <RouterLink v-for="({id, name, price, currency}) in props.shop.products" :key="id" :to="{ name: 'Product', params: { productId: id }}" class="flex">
                     <div class="h-20 w-20 bg-gray-500 rounded-lg flex-none"></div>
                     <div class="px-4 flex flex-col">
                         <span class="font-semibold">{{ name }}</span>

@@ -7,7 +7,7 @@ const cartStore = useCartStore()
 const { cart } = storeToRefs(cartStore);
 
 const routes = [
-    { name: 'Etablishments', label: 'Home', icon: ['fas', 'house'] },
+    { name: 'Shops', label: 'Home', icon: ['fas', 'house'] },
     { name: 'Search', label: 'Search', icon: ['fas', 'magnifying-glass'] },
     { name: 'Cart', label: 'Cart', icon: ['fas', 'cart-shopping'] },
     { name: 'Settings', label: 'Settings', icon: ['fas', 'user'] }

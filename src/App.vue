@@ -9,7 +9,7 @@ const { darkMode } = storeToRefs(app);
 
 const router = useRouter();
 
-router.push({ name: 'Etablishments'})
+router.push({ name: 'Shops'})
 
 provide('darkMode', darkMode);
 

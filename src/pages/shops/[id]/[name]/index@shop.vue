@@ -1,8 +1,8 @@
 <script lang=ts setup>
 import { definePage, useRouter } from 'vue-router/auto'
-import { useEtablishmentsStore } from '@/stores/etablishments'
+import { useShopsStore } from '@/stores/shops'
 
-import EtablishmentView from '@/views/EtablishmentView.vue';
+import ShopView from '@/views/ShopView.vue';
 import CartButton  from '@/components/cart/CartButton.vue';
 import Modal from '@/layouts/Modal.vue';
 import { computed, ref } from 'vue';
@@ -12,7 +12,7 @@ import Popup from '@/layouts/Popup.vue';
 import Button from '@/components/shared/Button.vue';
 
 definePage({
-    name: 'Etablishment', 
+    name: 'Shop', 
     /** @issue Cannot cast params with expression: (route) => ({ ... }) */
     props: true,
 })
@@ -26,15 +26,15 @@ const activeCartExistingPopup = ref<typeof Popup>()
 const cartStore = useCartStore();
 const { cart, groupedByProducts } = storeToRefs(cartStore);
 
-const etablishmentsStore = useEtablishmentsStore();
-const etablishment = computed(() => etablishmentsStore.getEtablishmentById(parseInt(props.id)))
-const etablishmentHasAnActiveCart = computed(() => cart.value.etablishmentId === etablishment.value?.id && cart.value.list.length > 0)
-const productsInCart = computed(() => etablishmentHasAnActiveCart.value ? groupedByProducts.value : [])
+const shopsStore = useShopsStore();
+const shop = computed(() => shopsStore.getShopById(parseInt(props.id)))
+const shopHasAnActiveCart = computed(() => cart.value.shopId === shop.value?.id && cart.value.list.length > 0)
+const productsInCart = computed(() => shopHasAnActiveCart.value ? groupedByProducts.value : [])
 
 const addToCart = (productId: number) => {
-    if (cart.value.etablishmentId === null) {
-        cart.value.etablishmentId = etablishment.value?.id as number
-    } else if (cart.value.etablishmentId !== etablishment.value?.id) {
+    if (cart.value.shopId === null) {
+        cart.value.shopId = shop.value?.id as number
+    } else if (cart.value.shopId !== shop.value?.id) {
         activeCartExistingPopup.value?.open();
         return;
     }
@@ -51,11 +51,11 @@ const resetCart = () => {
 
 <template>
     <Modal @close="router.back()" :title="props.name">
-        <EtablishmentView :etablishment="etablishment" :cart="productsInCart">
+        <ShopView :shop="shop" :cart="productsInCart">
             <template #bottomActions>
-                <CartButton v-if="etablishmentHasAnActiveCart" @click="router.push({ name: 'etablishment.cart' })" :quantity="cart.list.length" />
+                <CartButton v-if="shopHasAnActiveCart" @click="router.push({ name: 'shop.cart' })" :quantity="cart.list.length" />
             </template>
-        </EtablishmentView>
+        </ShopView>
     </Modal>
 
     <Popup ref="activeCartExistingPopup" class="flex flex-col gap-3 p-4">

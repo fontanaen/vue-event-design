@@ -5,11 +5,11 @@ import Modal from '@/layouts/Modal.vue';
 import CartView from '@/views/CartView.vue';
 import { useCartStore } from '@/stores/cart';
 import { storeToRefs } from 'pinia';
-import { useEtablishmentsStore } from '@/stores/etablishments';
+import { useShopsStore } from '@/stores/shops';
 import Button from '@/components/shared/Button.vue';
 
 definePage({
-    name : 'etablishment.cart', 
+    name : 'shop.cart', 
     /** @issue Cannot cast params with expression: (route) => ({ ... }) */
     props: true,
 })
@@ -19,13 +19,13 @@ const router = useRouter();
 const cartStore = useCartStore();
 const { cart, groupedByProducts, totalAmount } = storeToRefs(cartStore);
 
-const etablishmentsStore = useEtablishmentsStore();
+const shopsStore = useShopsStore();
 </script>
 
 <template>
     <Modal @close="router.back()" title="Cart" header-type="sticky">
         <CartView 
-            :etablishment="etablishmentsStore.getEtablishmentById(cart.etablishmentId) ?? null" 
+            :shop="shopsStore.getShopById(cart.shopId) ?? null" 
             :products="groupedByProducts"
             :totalAmount="totalAmount"
             @add="cartStore.addToCart" 

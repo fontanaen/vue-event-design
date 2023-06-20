@@ -1,5 +1,5 @@
 export default ({
-    "etablishments": [
+    "shops": [
         { 
             "id": 1, 
             "name": "Burger King", 

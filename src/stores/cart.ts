@@ -1,13 +1,13 @@
 import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
-import { useEtablishmentsStore } from '@/stores/etablishments'
+import { useShopsStore } from '@/stores/shops'
 import { Product } from '@/models/domain/products'
 
 export const useCartStore = defineStore('cart', () => {
-  const etablishmentsStore = useEtablishmentsStore();
+  const shopsStore = useShopsStore();
 
-  const cart = ref<{etablishmentId: number | null, list: Product[]}>({
-    etablishmentId: null,
+  const cart = ref<{shopId: number | null, list: Product[]}>({
+    shopId: null,
     list: [],
   });
 
@@ -28,7 +28,7 @@ export const useCartStore = defineStore('cart', () => {
   }, 0))
 
   const addToCart = (productId: number) => {
-    const product = etablishmentsStore.getProductById(cart.value.etablishmentId, productId);
+    const product = shopsStore.getProductById(cart.value.shopId, productId);
 
     if (product === undefined) throw new Error(`Product not found for id=${productId}`)
     
@@ -42,12 +42,12 @@ export const useCartStore = defineStore('cart', () => {
 
     cart.value.list.splice(index, 1);
 
-    if (cart.value.list.length === 0) cart.value.etablishmentId = null;
+    if (cart.value.list.length === 0) cart.value.shopId = null;
   }
 
   const $reset = () => {
     cart.value = {
-      etablishmentId: null,
+      shopId: null,
       list: [],
     }
   }

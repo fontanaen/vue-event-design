@@ -40,27 +40,27 @@ Pages are powered by [unplugin-vue-router](https://github.com/posva/unplugin-vue
 ### Navigation
 
 In the example project you can see that cart is accessible from two contexts:
-* From an etablishment with an active order
+* From a shop with an active order
 * From the footer link
 
 Theses contexts provide differents functionalities :
-* From an etablishment :
+* From a shop :
     * Confirm the cart
 * From the footer link :
     * Confirm the cart
-    * See other products -> return to etablishment page
+    * See other products -> return to shop page
 
 The context need to the cart to navigate to the right page after action like back, add products ... 
 This case is sample but each new context will complicate your component that has the only responsability to display and manage the cart.  
 
-The navigation wanted, from an Etablishment is to comeback to the Home page :
-* ✅ `Home` ➡ `Cart` ➡ `Etablishment` ➡ `Home`
-* ✅ `Home` ➡ `Etablishment` ➡ `Cart` ➡ `Etablishment`
+The navigation wanted, from a Shop is to comeback to the Home page :
+* ✅ `Home` ➡ `Cart` ➡ `Shop` ➡ `Home`
+* ✅ `Home` ➡ `Shop` ➡ `Cart` ➡ `Shop`
 
-Not to the `Cart` page. If use router.back() in Etablishment :
-* ❌ `Home` ➡ `Cart` ➡ `Etablishment` ➡ `Cart`
+Not to the `Cart` page. If use router.back() in Shop :
+* ❌ `Home` ➡ `Cart` ➡ `Shop` ➡ `Cart`
 
-And if etablishment is used in another context we maybe want to not return on the Home page so we setup routing in every context in /pages 
+And if shop is used in another context we maybe want to not return on the Home page so we setup routing in every context in /pages 
 
 ### Layouts
 
@@ -77,13 +77,13 @@ See :
     <Page>
         <CartView>
             <template #bottomActions>
-                <Button @click="router.push('/etablishment/id')">Add products</Button>
+                <Button @click="router.push('/shop/id')">Add products</Button>
             </template>
         </CartView>
     </Page>
 </template>
 
-<!-- /etablishment/:id/cart -->
+<!-- /shop/:id/cart -->
 <template>
     <Modal>
         <CartView></CartView>
@@ -118,7 +118,7 @@ In this example, this is not the deep child responsabilty to check if there is a
 
 <script setup>
 const addProduct = (id) => {
-    if (exstingOrderInAnotherEtablishment) {
+    if (exstingOrderInAnotherShop) {
         showModal()
         return;
     }

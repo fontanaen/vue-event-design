@@ -1,6 +1,6 @@
 <script lang=ts setup>
 import { definePage, useRouter } from 'vue-router/auto'
-import { useEtablishmentsStore } from '@/stores/etablishments'
+import { useShopsStore } from '@/stores/shops'
 
 import Modal from '@/layouts/Modal.vue';
 import ProductView from '@/views/ProductView.vue';
@@ -18,8 +18,8 @@ const router = useRouter();
 const emit = defineEmits<{ (e: 'addToCart', productId: number): void }>()
 const props = defineProps<{ id: string, productId: string }>()
 
-const etablishmentsStore = useEtablishmentsStore();
-const product = computed(() => etablishmentsStore.getProductById(parseInt(props.id), parseInt(props.productId)));
+const shopsStore = useShopsStore();
+const product = computed(() => shopsStore.getProductById(parseInt(props.id), parseInt(props.productId)));
 </script>
 
 <template>
